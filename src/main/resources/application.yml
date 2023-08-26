@@ -1,5 +1,10 @@
 file:
   upload-dir: "/videos"
+security:
+  jwt:
+    token:
+      secret-key: 55sz21
+      expire-length: 18000000
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
