@@ -40,7 +40,7 @@ public class UserModel implements UserDetails,Serializable {
     private Boolean enabled;
 
     @JsonIgnore
-    @OneToMany(mappedBy = user)
+    @OneToMany(mappedBy = "user")
     private List<VideoModel> videos = new ArrayList<>();
 
     public UserModel(){}
