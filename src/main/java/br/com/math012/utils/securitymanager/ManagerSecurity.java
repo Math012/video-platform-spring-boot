@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.Base64;
 
@@ -24,5 +25,9 @@ public class ManagerSecurity {
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
         return  decodedJWT;
+    }
+
+    public static String getUrl(){
+        return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
     }
 }
