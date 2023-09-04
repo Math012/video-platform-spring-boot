@@ -1,5 +1,6 @@
 package br.com.math012.config.security;
 
+import br.com.math012.exceptions.InvalidTokenJwtException;
 import br.com.math012.utils.securitymanager.ManagerSecurity;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -80,8 +81,7 @@ public class JwtTokenProvider {
             }
             return true;
         }catch (Exception e){
-            //adicionar exception: InvalidJwtAuthenticationException
-            throw new RuntimeException();
+            throw new InvalidTokenJwtException("Expired or invalid JWT TOKEN!");
         }
     }
 }
