@@ -12,13 +12,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import br.com.math012.VO.tokenVO;
 
 import java.util.Date;
 import java.util.List;
 
-@Service
+@Component
 public class JwtTokenProvider {
 
 
@@ -28,12 +29,13 @@ public class JwtTokenProvider {
     @Value("${security.jwt.token.expire-length:18000000}")
     private long validateMiliSeconds = 18000000;
 
-    @Autowired
+
+    @Autowired(required = false)
     private UserDetailsService userDetailsService;
 
     Algorithm algorithm = null;
 
-    @PostConstruct void start(){
+    @PostConstruct void init(){
         secretKey = ManagerSecurity.encryptSecretKey(secretKey);
         algorithm = ManagerSecurity.getAlgorithm(secretKey);
     }
