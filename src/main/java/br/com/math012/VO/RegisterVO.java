@@ -17,8 +17,7 @@ public class RegisterVO {
 
     public RegisterVO(){}
 
-    public RegisterVO(Long idVO, String username, String fullname, String password) {
-        this.idVO = idVO;
+    public RegisterVO(String username, String fullname, String password) {
         this.username = username;
         this.fullname = fullname;
         this.password = password;
