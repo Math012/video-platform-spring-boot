@@ -72,22 +72,22 @@ public class UserModel implements UserDetails,Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return this.isCredentialsNonExpired();
+        return this.accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return this.isAccountNonLocked();
+        return this.accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return this.isCredentialsNonExpired();
+        return this.accountNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return this.isEnabled();
+        return this.enabled;
     }
 
     public Long getId() {
