@@ -46,7 +46,7 @@ public class AuthService {
         }
     }
 
-    public void RegisterUser(RegisterVO register){
+    public void registerUser(RegisterVO register){
         register.setPassword(EncodePassword.enconde(register.getPassword()));
         if (userRepository.findByUsername(register.getUsername())!= null){
             throw new ExistingObjectException("this username: "+ register.getUsername()+", already registered");
