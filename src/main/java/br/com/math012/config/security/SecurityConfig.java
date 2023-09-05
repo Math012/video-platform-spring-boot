@@ -47,8 +47,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(
                         authorizeHttpRequests -> authorizeHttpRequests.requestMatchers(
-                                "api/v1/**"
-                        ).permitAll()
+                                        "/api/auth/**").permitAll()
+                                .requestMatchers("/api/**").authenticated()
                 ).cors()
                 .and()
                 .apply(new JwtConfigurer(tokenProvider))
