@@ -145,4 +145,8 @@ public class UserModel implements UserDetails,Serializable {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
+    public List<String> getRoles(){
+        return null;
+    }
 }
