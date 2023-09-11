@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
-@Tag(name = "Authentication endpoint")
+@Tag(name = "Endpoint authentication")
 @RestController
 @RequestMapping(value = "/api/auth")
 public class AuthController {
