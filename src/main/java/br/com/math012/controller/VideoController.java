@@ -3,6 +3,9 @@ package br.com.math012.controller;
 import br.com.math012.VO.VideoVO;
 import br.com.math012.service.FileStorageService;
 import br.com.math012.service.VideoService;
+import br.com.math012.utils.mediatype.ConstMediaType;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.Date;
 import java.util.List;
 
+@Tag(name = "Endpoint for videos")
 @RestController
 @RequestMapping(value = "api/video/v1")
 public class VideoController {
@@ -26,16 +30,19 @@ public class VideoController {
     @Autowired
     private FileStorageService fileStorageService;
 
-    @GetMapping(value = "/{username}")
+    @Operation(summary = "Endpoint list of videos by username")
+    @GetMapping(value = "/{username}", produces = {ConstMediaType.APPLICATION_JSON, ConstMediaType.APPLICATION_XML, ConstMediaType.APPLICATION_YML})
     public List<VideoVO> findAllByUsername(@PathVariable(value = "username")String username){
         return videoService.findAllVideosByUsername(username);
     }
 
-    @GetMapping(value = "/videos")
+    @Operation(summary = "Endpoint list of all videos")
+    @GetMapping(value = "/videos", produces = {ConstMediaType.APPLICATION_JSON, ConstMediaType.APPLICATION_XML, ConstMediaType.APPLICATION_YML})
     public List<VideoVO> findAll(){
         return videoService.findAll();
     }
 
+    @Operation(summary = "Endpoint upload videos")
     @PostMapping(value = "/uploads/{username}")
     public VideoVO upload(@RequestParam("file")MultipartFile file,@PathVariable(value = "username")String username){
         var filename = fileStorageService.storeFile(file,username);
