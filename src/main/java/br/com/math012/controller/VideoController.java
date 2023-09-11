@@ -41,7 +41,7 @@ public class VideoController {
         var filename = fileStorageService.storeFile(file,username);
         String videoDownload = ServletUriComponentsBuilder
                 .fromCurrentContextPath()
-                .path("/api/videos/v1/download/")
+                .path("/api/video/v1/download/")
                 .path(username).path("/")
                 .path(filename)
                 .toUriString();
