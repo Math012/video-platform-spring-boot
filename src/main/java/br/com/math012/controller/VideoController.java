@@ -57,6 +57,7 @@ public class VideoController {
         return videoVO;
     }
 
+    @Operation(summary = "Endpoint download videos")
     @GetMapping(value = "/download/{username}/{filename:.+}")
     public ResponseEntity<Resource> download(@PathVariable(value = "username")String username, @PathVariable(value = "filename")String filename, HttpServletRequest request){
         Resource resource = fileStorageService.loadVideo(filename,username);
