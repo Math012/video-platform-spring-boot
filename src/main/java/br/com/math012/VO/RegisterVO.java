@@ -2,10 +2,12 @@ package br.com.math012.VO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.github.dozermapper.core.Mapping;
+import org.springframework.hateoas.RepresentationModel;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class RegisterVO {
+public class RegisterVO extends RepresentationModel<RegisterVO> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @JsonProperty("id")

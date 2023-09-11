@@ -1,9 +1,11 @@
 package br.com.math012.VO;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class AccountVO implements Serializable {
+public class AccountVO extends RepresentationModel<AccountVO> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String username;
