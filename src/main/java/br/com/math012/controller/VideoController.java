@@ -5,6 +5,11 @@ import br.com.math012.service.FileStorageService;
 import br.com.math012.service.VideoService;
 import br.com.math012.utils.mediatype.ConstMediaType;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,18 +37,42 @@ public class VideoController {
 
     @Operation(summary = "Endpoint list of videos by username")
     @GetMapping(value = "/{username}", produces = {ConstMediaType.APPLICATION_JSON, ConstMediaType.APPLICATION_XML, ConstMediaType.APPLICATION_YML})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sucess", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = VideoVO.class)))}),
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Enauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
+    })
     public List<VideoVO> findAllByUsername(@PathVariable(value = "username")String username){
         return videoService.findAllVideosByUsername(username);
     }
 
     @Operation(summary = "Endpoint list of all videos")
     @GetMapping(value = "/videos", produces = {ConstMediaType.APPLICATION_JSON, ConstMediaType.APPLICATION_XML, ConstMediaType.APPLICATION_YML})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sucess", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = VideoVO.class)))}),
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Enauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
+    })
     public List<VideoVO> findAll(){
         return videoService.findAll();
     }
 
     @Operation(summary = "Endpoint upload videos")
     @PostMapping(value = "/uploads/{username}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sucess", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = VideoVO.class)))}),
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Enauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
+    })
     public VideoVO upload(@RequestParam("file")MultipartFile file,@PathVariable(value = "username")String username){
         var filename = fileStorageService.storeFile(file,username);
         String videoDownload = ServletUriComponentsBuilder
@@ -59,6 +88,14 @@ public class VideoController {
 
     @Operation(summary = "Endpoint download videos")
     @GetMapping(value = "/download/{username}/{filename:.+}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sucess", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = VideoVO.class)))}),
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Enauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
+    })
     public ResponseEntity<Resource> download(@PathVariable(value = "username")String username, @PathVariable(value = "filename")String filename, HttpServletRequest request){
         Resource resource = fileStorageService.loadVideo(filename,username);
         String content = null;
