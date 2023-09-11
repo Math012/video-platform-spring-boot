@@ -21,8 +21,7 @@ public class VideoVO implements Serializable{
 
     public VideoVO(){}
 
-    public VideoVO(Long idVO, String title, Date postDate, String urlVideo) {
-        this.idVO = idVO;
+    public VideoVO(String title, Date postDate, String urlVideo) {
         this.title = title;
         this.postDate = postDate;
         this.urlVideo = urlVideo;
