@@ -41,7 +41,7 @@ public class VideoService {
         }
         var video = DozerConverter.parseObject(videoVO, VideoModel.class);
         video.setUser(user);
-        var videoVO = DozerConverter.parseObject(videoRepository.save(video),VideoVO.class);
-        return videoVO;
+        var videoModel = DozerConverter.parseObject(videoRepository.save(video),VideoVO.class);
+        return videoModel;
     }
 }
