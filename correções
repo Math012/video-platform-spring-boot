@@ -1,0 +1,12 @@
+Ajustes:
+    - Adicionar as permissões de usuario.
+    - Adicionar os testes unitarios.
+    - Adicionar os links HETEOAS.
+    - Adicionar o campo: descrição ao video.
+
+correções:
+    - Correção do videoVO para retornar o username do usuario.
+    - Correção da data do service/controller upload(duplicidade de codigo).
+    - Correção do envio dos arquivos, se o usuario enviar mais de um arquivo com o mesmo nome, o arquivo não é
+    adicionado novamente, é subscrito.
+
