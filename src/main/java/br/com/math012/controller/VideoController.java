@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -81,7 +83,8 @@ public class VideoController {
                 .path(username).path("/")
                 .path(filename)
                 .toUriString();
-        var videoVO = new VideoVO(filename,new Date(),videoDownload);
+        //for correction = new Date()
+        var videoVO = new VideoVO(filename, new Date(),videoDownload);
         videoService.uploadVideo(videoVO,username);
         return videoVO;
     }
@@ -110,4 +113,32 @@ public class VideoController {
         return ResponseEntity.ok().contentType(MediaType.parseMediaType(content)).header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+resource.getFilename()+"\"").body(resource);
     }
 
+    @Operation(summary = "Endpoint update videos")
+    @PutMapping(value = "/update")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sucess", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = VideoVO.class)))}),
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Enauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
+    })
+    public VideoVO update(@RequestBody VideoVO videoVO){
+        return videoService.update(videoVO);
+    }
+
+    @Operation(summary = "Endpoint delete videos")
+    @DeleteMapping(value = "/delete/{username}/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Sucess", content = {@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = VideoVO.class)))}),
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Enauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal Error", content = @Content),
+    })
+    public ResponseEntity<?> delete(@PathVariable(value = "username")String username,@PathVariable(value = "id")Long id){
+        videoService.delete(username,id);
+        return ResponseEntity.noContent().build();
+    }
 }

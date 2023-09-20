@@ -1,19 +1,18 @@
 package br.com.math012.service;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 
 import br.com.math012.VO.VideoVO;
-import br.com.math012.controller.VideoController;
 import br.com.math012.dozer.DozerConverter;
 import br.com.math012.exceptions.NotFoundException;
+import br.com.math012.models.UserModel;
 import br.com.math012.models.VideoModel;
 import br.com.math012.repository.UserRepository;
 import br.com.math012.repository.VideoRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.Date;
 import java.util.List;
 
@@ -51,6 +50,20 @@ public class VideoService {
         videoModel.setDatePost(new Date());
         var videoVO = DozerConverter.parseObject(videoRepository.save(videoModel), VideoVO.class);
         return videoVO;
-
     }
+
+    public VideoVO update(VideoVO videoVO){
+        if (videoVO == null) throw new NotFoundException("This video not found!");
+        var video = videoRepository.findById(videoVO.getIdVO());
+        video.get().setTitle(videoVO.getTitle());
+        var vo = DozerConverter.parseObject(videoRepository.save(video.get()),VideoVO.class);
+        return vo;
+    }
+
+    public void delete(String username, Long id){
+        var user = userRepository.findByUsername(username);
+        if (user == null) throw new NotFoundException("this username: " + username + ", not found, try again!");
+        videoRepository.deleteById(id);
+    }
+
 }
