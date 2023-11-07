@@ -85,6 +85,65 @@ Ao final do processo, convertemos novamente o VideoModel para VideoVO e registra
 
 ![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/fb720a6b-1182-4eaf-b100-79b64fca489e)
 
+Configurações adicionais para o upload de videos no application.yml
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/7bf4acd8-acab-416f-8ae6-b04443d8ff4f)
+
+
+- Serviço para armazenamento dos vídeos.
+
+Como estamos lidando com metadados, todos os vídeos são armazenados numa pasta e obrigatoriamente um vídeo precisa ter um usuário, para que todos os vídeos não fiquem misturados dentro da pasta utilizamos o pacote File do Java com o username do usuário.
+
+Após a verificar se o usuário está registrado no banco de dados, é fornecido uma url personalizada com o "path" (caminho para a pasta) e o username fornecido via parâmetro, assim quando um usuário específico postar um video, será criada uma pasta com o username, assim evitando duplicidade de pastas tendo em vista que o username é único.
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/1e003eb8-c35b-461f-b91e-04815eb2fc73)
+
+# Swagger com todos os Endpoints
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/647c1d18-6084-419e-9ab2-833c3e9b1690)
+
+- Schemas
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/62edaf22-48d8-44e9-9bcc-abf58d62c6ec)
+
+# Estrutura geral do Projeto
+
+- Configuração do Swagger
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/0a672bcf-5275-4786-8605-e035d522888e)
+
+- Configurando o Content Negotiation
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/4edf81cd-98e9-4abf-9cb5-461bd3a34669)
+
+- Configuração e implementação do Security Config
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/5ca72879-d920-43fd-ada3-39dd2b5c1fc9)
+
+- Controller
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/6b0936b5-1aaf-499f-8e6b-76d0f96b6c44)
+
+- Configuração do Dozer para o Object Value
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/a148dc13-2cdf-4180-97f4-b4f89a112028)
+
+- Tratamento de Erros e Exceções
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/c025e6ea-40c4-4d72-b6f9-15ca2d88b880)
+
+- Crianção do Repository
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/5def7284-7dd7-4483-94df-600ddb5cf7b8)
+
+- Criação do Encoder para a criptografia da senha e o MediaType para JSON, XML e YAML.
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/981ef46a-f6d0-4a88-aba6-c5188ba587a9)
+
+- Implementação do Flyway Migrations/scripts
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/059b782c-6dc7-4869-b714-a0e894d8199a)
+
 
 
 
