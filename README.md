@@ -73,4 +73,18 @@ Após todas as validações, criamos um objeto do tipo UserModel, setamos todas 
 
 ![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/403672d6-fe85-4b2d-abec-49ce80649d1c)
 
+- Serviço para efetuar o upload dos vídeos.
+
+Tendo um retorno de um VideoVO e recebendo um VideoVO e uma String como parametro, verificamos se este usuario está registrado no banco de dados.
+
+A ideia principal é que o desenvolvedor front end, transite o token e o username do usuario pelas rotas da API atraves do localstorage, assim que usuario fizer login, o token e o username vão para o localstorage, assim podendo utilizar o sistema de upload de videos.
+
+Após a verificação do username, convertemos o VideoVO em VideoModel para setar o usuario e a sua data.
+
+Ao final do processo, convertemos novamente o VideoModel para VideoVO e registramos o video no banco de dados junto com o username do usuario que fez o upload.
+
+![image](https://github.com/Math012/video-platform-spring-boot/assets/109437880/fb720a6b-1182-4eaf-b100-79b64fca489e)
+
+
+
 
